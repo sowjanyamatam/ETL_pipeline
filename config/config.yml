@@ -1,0 +1,22 @@
+# logging information
+logging:
+  level : INFO
+  format : '%(asctime)s - %(levelname)s - %(message)s'
+
+
+# Input, ouptut, prcoessed and error folder paths
+folder_paths:
+  input_folder_path : "/Users/srikarmanthatti/Documents/Data Engineering/Extraction/Assignment/data/files_input/"
+  raw_folder_path : "/Users/srikarmanthatti/Documents/Data Engineering/Extraction/Assignment/data/files_raw/"
+  processed_folder_path : "/Users/srikarmanthatti/Documents/Data Engineering/Extraction/Assignment/data/files_processed/"
+  error_folder_path : "/Users/srikarmanthatti/Documents/Data Engineering/Extraction/Assignment/data/files_error/"
+
+
+# Database details
+access_details:
+  db_name : "pg_db_jan"
+  load_dbname : "redshift_db"
+
+# API details
+api_details:
+  api_url : "http://127.0.0.1:8000/random"
