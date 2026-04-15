@@ -1,0 +1,6 @@
+sales_number,sales_overall_delivery
+1001,DELIV_OK
+1002,PENDING
+1003,DELIV_OK
+1004,PARTIAL
+1005,CANCELLED

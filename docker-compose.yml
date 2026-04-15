@@ -1,0 +1,27 @@
+services:
+  db:
+    image: postgres:15
+    container_name: etl_postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: etl_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  etl:
+    build: .
+    container_name: etl_pipeline
+    depends_on:
+      - db
+    environment:
+      db_username: postgres
+      db_password: postgres
+      DB_HOST: db
+    command: ["python", "scripts/main.py"]
+
+volumes:
+  pgdata:

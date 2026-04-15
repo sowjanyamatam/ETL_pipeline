@@ -1,17 +1,48 @@
-# ETL Pipeline Project
+# ETL Pipeline Project (Dockerized)
 
-## Project details
+This projects implements a config-driven ETL pipleline that extracts data from multiple sources(file directory/DB table/API), validates it and loads it into a database.
+
+## Project details - Architecture
+
 Extract -> Transform -> Load
 
-- Extract : PostgreSQL - sourceDB(pg_db_jan) - Python reads table and writes it into .csv in files_input folder/reads from files/reads from API call.
-- Transform : Based on conditions, moves the files to error or processed folder. And appends data to output folder files with extra columns (creation & processed timestamps)
-- Load : Loads the output folder files to new database (redshift_db) tables.
+- EXTRACT : 
+
+    1. "DB_intregation.py" python script - reads data from database and writes
+         .csv to "data/files_input" folder
+    2. "file_integration" python scipt - reads data from other local files to "data/files_input"
+        folder
+    3. "API_integration" python scipt - fetches data from API and writes data to "data/files_input" folder.
+
+- TRANSFORM : 
+
+    Data is validated based on control vs data files. If validation fails - files are moved to "data/files_error" folder.
+
+- LOAD : 
+
+    If validated correctly, moves the files to db table (Raw -> Validated) and then to "data/files_processed" folder.
+
+- main.py : 
+
+    runs every 30secs and continuoulsy scans "data/files_input" folder.
+
 
 ## setup
-- pip3 install -r requirements.txt
+- pip3 install --no-cache-dir -r requirements.txt
+- python3 scipts/main.py    
 
 ## Python files
-- Assignment/scripts/convert_fetchDB.py
-- Assignment/scripts/convert_fetchfiles.py
-- Assignment/scripts/writeto_redshiftDB.py
-- Assignment/scripts/read_from_api.py
+- Assignment/scripts/API_integration.py
+- Assignment/scripts/DB_integration.py
+- Assignment/scripts/file_integration.py
+- Assignment/scripts/main.py
+
+## Run with Docker
+docker build -t etl-pipleline
+docker run --env-file .env etl-pipleine
+
+## Features
+- Multi source ingestion(file, db, API)
+- config driveb onboarding
+- Validation
+- Dockerized deployement
