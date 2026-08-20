@@ -1,0 +1,78 @@
+# logging information
+logging:
+  level : INFO
+  format : '%(asctime)s - %(levelname)s - %(message)s'
+
+
+# Input, ouptut, prcoessed and error folder paths
+folder_paths:
+  input_folder_path : "data/files_input/"
+  material_header_input_path : "data/files_input/material/material_header/"
+  material_item_input_path : "data/files_input/material/material_item/"
+  sales_header_input_path : "data/files_input/sales/sales_header/"
+  sales_item_input_path : "data/files_input/sales/sales_item/"
+  api_files_input_path : "data/files_input/api/api_files"
+
+  processed_folder_path : "data/files_processed/"
+  material_header_processed_path : "data/files_processed/material/material_header/"
+  material_item_processed_path : "data/files_processed/material/material_item/"
+  sales_header_processed_path : "data/files_processed/sales/sales_header/"
+  sales_item_processed_path : "data/files_processed/sales/sales_item/"
+  api_files_processed_path : "data/files_processed/api/api_files"
+
+  error_folder_path : "data/files_error/"
+
+  
+# Source Files Directory path
+files_directory: 
+  path : "data/files_directory"
+  material_header_source_path : "data/files_directory/material_header"
+  material_item_source_path : "data/files_directory/material_item"
+
+# Source & Target Database details
+access_details:
+  source_db : "pg_db_jan"
+  target_db : "redshift_db"
+  host : "localhost"
+
+# API details
+api_details:
+  api_url : "http://127.0.0.1:8000/random"
+
+# List of customer-domain-files
+#schema details
+
+customer_domains:
+  sales:
+    folder : "sales"
+    schema_raw : "sales_schema_raw"
+    schema_validated : "sales_schema_validated"
+    schema_source : "sales_schema"
+    tables:
+      sales_header:
+        table : "sales_header"
+        control_table : "sales_header_control"
+      sales_item:
+        table : "sales_item"
+        control_table : "sales_item_control"
+  
+  material:
+    folder : "material"
+    schema_validated : "material_schema_validated"
+    schema_raw : "material_schema_raw"
+    tables:
+      material_header:
+        table : "material_header"
+        control_table : "material_header_control"
+      material_item:
+        table : "material_item"
+        control_table : "material_item_control"
+  
+  api:
+    folder : "api"
+    schema_validated : "api_schema_validated"
+    schema_raw : "api_schema_raw"
+    tables:
+      api_files:
+        table : "api_files"
+        control_table : "api_files_control"
